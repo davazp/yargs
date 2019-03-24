@@ -781,7 +781,7 @@ describe('usage tests', () => {
           bar: { demand: 'bar option', alias: 'b' }
         }
 
-        return yargs('-f 10 --bar 20 --baz 30')
+        return yargs('-f 10 --bar 20 --foo-baz 30')
           .usage('Usage: $0 [options]')
           .options(opts)
           .strict()
@@ -795,7 +795,7 @@ describe('usage tests', () => {
       r.result.should.have.property('foo', 10)
       r.result.should.have.property('b', 20)
       r.result.should.have.property('bar', 20)
-      r.result.should.have.property('baz', 30)
+      r.result.should.have.property('foo-baz', 30)
       r.should.have.property('errors')
       r.errors.join('\n').split(/\n+/).should.deep.equal([
         'Usage: usage [options]',
@@ -804,7 +804,7 @@ describe('usage tests', () => {
         '  --version  Show version number  [boolean]',
         '  --foo, -f  [required]',
         '  --bar, -b  [required]',
-        'Unknown argument: baz'
+        'Unknown argument: foo-baz'
       ])
       r.should.have.property('logs').with.length(0)
       r.should.have.property('exit').and.equal(true)
